@@ -13,16 +13,20 @@ to:
 VAT: 20
 service:
 - description: The first service provided
-  price: 320.00
+  per_hour: 20
+  hours: 50
   details:
 - description: And another one, with a list of details
-  price: 245.00
+  per_hour: 50
+  hours: 10
   details:
     - Some more detailed explanation
     - of the service provided
     - Looking good
-- description: The last service provided
-  price: 65.00
+
+intronote: |
+  Dear Customer, 
+  please find the bill for the recently provided services below.
 
 closingnote: |
   Please transfer the due amount to the following bank account within the next 14 days:

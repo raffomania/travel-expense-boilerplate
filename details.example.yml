@@ -10,6 +10,11 @@ to:
 - Musterallee 1
 - 12345 Musterstadt
 - Germany
+tax_info:
+  - 'Tax ID: 12121212121'
+bank_info:
+  - 'IBAN: 9393939393939'
+  - 'BIC: EU12121212'
 VAT: 20
 service:
 - description: The first service provided

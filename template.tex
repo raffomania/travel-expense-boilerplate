@@ -112,30 +112,33 @@ $endfor$
   $city$, \today
 \end{flushright}
 
-\vspace{1em}
-
-
 \section*{\textsc{Rechnung} \textsc{\#$invoice-nr$}}
+
+\medskip
+
+$intronote$
+
 \footnotesize
 \newcounter{pos}
 \setcounter{pos}{0}
 \STautoround*{2} % Get spreadtab to always display the decimal part
 $if(commasep)$\STsetdecimalsep{,}$endif$ % Use comma as decimal separator
 
-\begin{spreadtab}{{tabular}[t t t]{lp{8.2cm}r}}
+\begin{spreadtab}{{tabular}{lp{4.2cm}rrr}}
   \hdashline[1pt/1pt]
-  @ \noalign{\vskip 2mm} \textbf{Pos.} & @ \textbf{Aktivität} & @ \textbf{Preis in $currency$} \\ \hline
+  @ \noalign{\vskip 2mm} \textbf{Pos.} & @ \textbf{Aktivität} & @ \textbf{$currency$/Einheit} & @ \textbf{Anzahl} & @ \textbf{Preis in $currency$} \\ \hline
       $for(service)$ @ \noalign{\vskip 2mm} \refstepcounter{pos} \thepos 
         & @ $service.description$ 
         $if(service.details)$\newline \begin{itemize} 
           $for(service.details)$\scriptsize \item $service.details$ 
           $endfor$ \end{itemize}
-          $endif$ & $service.price$\\$endfor$ \noalign{\vskip 2mm} \hline
+        $endif$ & $service.per_hour$ & $service.hours$ & [-1,0]*[-2,0] \\
+      $endfor$ \noalign{\vskip 2mm} \hline
   $if(VAT)$
-    @ & @ \multicolumn{1}{r}{Summe Honorare:}                & :={sum(c1:[0,-1])} \\ \hhline{~~-}
-    @ & @ \multicolumn{1}{r}{Umsatzsteuer $VAT$\%:}               & $VAT$/100*[0,-1] \\ \hhline{~~-}
+    @ & @ & @ \multicolumn{2}{r}{Summe Honorare:}                & :={sum(e1:[0,-1])} \\ \hhline{~~~~-}
+    @ & @ & @ \multicolumn{2}{r}{Umsatzsteuer $VAT$\%:}               & $VAT$/100*[0,-1] \\ \hhline{~~~~-}
   $endif$
-  @ & @ \multicolumn{1}{r}{\textbf{Total:}}   & \textbf{:={$if(VAT)$[0,-1]+[0,-2]$else$sum(c1:[0,-1])$endif$}} \\ \hhline{~~-}
+  @ & @ & @ \multicolumn{2}{r}{\textbf{Gesamtsumme:}}   & \textbf{:={$if(VAT)$[0,-1]+[0,-2]$else$sum(c1:[0,-1])$endif$}} \\ \hhline{~~~~-}
 \end{spreadtab}
 
 
@@ -147,9 +150,9 @@ $closingnote$
 
 \medskip
 
-\IfFileExists{signature.pdf}
+\IfFileExists{signature.jpg}
 {
-      \includegraphics[height=3.5\baselineskip]{signature.pdf} \par
+      \includegraphics[height=3.5\baselineskip]{signature.jpg} \par
 }
 
 $author$

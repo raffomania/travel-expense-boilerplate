@@ -42,8 +42,8 @@ currency: EUR
 lang: en-GB
 
 # Typography and layout
-seriffont: Hoefler Text
-sansfont: Helvetica Neue
+seriffont: Vollkorn
+sansfont: Noto Sans
 fontsize: 10pt
 geometry: a4paper, left=43mm, right=43mm, top=51mm, bottom=17mm
 # letterhead: true # To include personalized letterheads

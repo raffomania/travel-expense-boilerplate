@@ -71,8 +71,7 @@ $endif$
 % LANGUAGE
 %--------------------------------
 $if(lang)$
-\usepackage{polyglossia}
-\setmainlanguage{$polyglossia-lang.name$}
+\usepackage[$for(babel-otherlangs)$$babel-otherlangs$,$endfor$main=$babel-lang$]{babel}
 $endif$
 
 % PDF SETUP

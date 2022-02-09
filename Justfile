@@ -1,5 +1,5 @@
 build:
-	deno run --allow-read --allow-write render.ts
+	deno run --allow-read=. render.ts > output.html
 	wkhtmltopdf output.html output.pdf
 
 watch:

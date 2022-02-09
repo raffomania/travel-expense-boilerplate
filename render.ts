@@ -1,21 +1,6 @@
 import { parse as parseYaml } from "https://deno.land/std@0.63.0/encoding/yaml.ts";
 import render from "./template.ts";
 
-const decoder = new TextDecoder("utf-8");
-
-const yamlFile = await Deno.readFile("./details.yml");
-
-/** Decoding the file text. */
-const yamlText = decoder.decode(yamlFile);
-
-/** Returning parsed yaml as an object. */
-const details: Details = (await parseYaml(yamlText)) as Details;
-
-const rendered = render(details);
-
-const encoder = new TextEncoder();
-await Deno.writeFile("output.html", encoder.encode(rendered));
-
 export interface Details {
     city: string;
     date: string;
@@ -38,3 +23,17 @@ export interface Entry {
     food_money: number;
     end_time: string;
 }
+
+const decoder = new TextDecoder("utf-8");
+
+const yamlFile = await Deno.readFile("./details.yml");
+
+/** Decoding the file text. */
+const yamlText = decoder.decode(yamlFile);
+
+/** Returning parsed yaml as an object. */
+const details: Details = (await parseYaml(yamlText)) as Details;
+
+const rendered = render(details);
+
+console.log(rendered);

@@ -6,4 +6,4 @@ watch:
 	watchexec -e yml,html,ts,css --no-project-ignore -i 'html2pdf*' -i 'output.*' 'just build'
 
 clean:
-	rm output.pdf
+	rm output.pdf output.html

@@ -1,6 +1,8 @@
 import { encode } from "https://deno.land/std/encoding/base64.ts";
+import { Details, Entry } from "./render.ts";
+import { prop, sum } from "https://deno.land/x/ramda@v0.27.2/mod.ts";
 
-export default function render(details: any) {
+export default function render(details: Details) {
     const {
         city,
         date,
@@ -14,6 +16,7 @@ export default function render(details: any) {
     } = details;
 
     const rows = entries.map(row).join("");
+    const total_km = sum(entries.map(prop("km")));
     const decoder = new TextDecoder("utf-8");
     const styles = decoder.decode(Deno.readFileSync("./main.css"));
 
@@ -48,6 +51,14 @@ export default function render(details: any) {
     </tr>
 
     ${rows}
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td align="right">Summen</td>
+      <td>${total_km} km</td>
+    </tr>
   </table>
 
   <p>${city}, den ${date}</p>
@@ -56,7 +67,7 @@ export default function render(details: any) {
 </html>`;
 }
 
-function row(it: any) {
+function row(it: Entry) {
     return `
 <tr valign="top">
   <td rowspan=2>${it.index}</td>
@@ -64,7 +75,7 @@ function row(it: any) {
   <td>${it.start_time}</td>
   <td rowspan=2>${it.subject}</td>
   <td rowspan=2>${it.hours}</td>
-  <td rowspan=2>${it.km}</td>
+  <td rowspan=2>${it.km} km x 0,30€</td>
   <td rowspan=2>${it.food_money}</td>
 </tr>
 <tr>

@@ -1,7 +1,8 @@
 import { parse as parseYaml } from "https://deno.land/std@0.63.0/encoding/yaml.ts";
 import render from "./template.ts";
+import { prop, sum } from "https://deno.land/x/ramda@v0.27.2/mod.ts";
 
-export interface Details {
+export interface RawDetails {
     city: string;
     date: string;
     title: string;
@@ -11,6 +12,12 @@ export interface Details {
     company: string;
     signature_image: string;
     entries: Entry[];
+}
+
+export interface Details extends RawDetails {
+    total_km: number;
+    total_driving_costs: number;
+    total_food_money: number;
 }
 
 export interface Entry {
@@ -32,7 +39,18 @@ const yamlFile = await Deno.readFile("./details.yml");
 const yamlText = decoder.decode(yamlFile);
 
 /** Returning parsed yaml as an object. */
-const details: Details = (await parseYaml(yamlText)) as Details;
+const rawDetails: RawDetails = (await parseYaml(yamlText)) as RawDetails;
+
+const total_km = sum(rawDetails["entries"].map(prop("km")));
+const total_driving_costs = total_km * 0.3;
+const total_food_money = sum(rawDetails["entries"].map(prop("food_money")));
+
+const details: Details = {
+    total_km,
+    total_driving_costs,
+    total_food_money,
+    ...rawDetails,
+};
 
 const rendered = render(details);
 

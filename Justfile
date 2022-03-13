@@ -1,4 +1,4 @@
-build file='details.yml':
+run file='details.yml':
 	deno run --allow-read render.ts {{file}} > output.html
 	wkhtmltopdf output.html output.pdf
 

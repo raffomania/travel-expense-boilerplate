@@ -24,6 +24,8 @@ export interface Entry {
     end_time: string;
 }
 
+console.log(Deno.args[0]);
+
 const decoder = new TextDecoder("utf-8");
 
 const yamlFile = await Deno.readFile("./details.yml");

@@ -1,5 +1,5 @@
-build:
-	deno run --allow-read=. render.ts > output.html
+build file='details.yml':
+	deno run --allow-read render.ts {{file}} > output.html
 	wkhtmltopdf output.html output.pdf
 
 watch:

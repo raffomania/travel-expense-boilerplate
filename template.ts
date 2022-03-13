@@ -1,6 +1,5 @@
 import { encode } from "https://deno.land/std/encoding/base64.ts";
 import { Details, Entry } from "./render.ts";
-import { prop, sum } from "https://deno.land/x/ramda@v0.27.2/mod.ts";
 
 export default function render(details: Details) {
     const {
@@ -13,10 +12,12 @@ export default function render(details: Details) {
         company,
         entries,
         signature_image,
+        total_km,
+        total_food_money,
+        total_driving_costs,
     } = details;
 
     const rows = entries.map(row).join("");
-    const total_km = sum(entries.map(prop("km")));
     const decoder = new TextDecoder("utf-8");
     const styles = decoder.decode(Deno.readFileSync("./main.css"));
 
@@ -34,9 +35,9 @@ export default function render(details: Details) {
 </head>
 <body>
   <header id="title-block-header">
+  <span style="float: right;">Vom ${start_date} bis ${end_date}</span>
   <h1 class="title">${title}</h1>
   <p class="author">Name: ${author}, Firma: ${company}</p>
-  <p>Vom ${start_date} bis ${end_date}</p>
   </header>
 
   <table style="width: 100%;">
@@ -51,15 +52,16 @@ export default function render(details: Details) {
     </tr>
 
     ${rows}
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td align="right">Summen</td>
-      <td>${total_km} km</td>
+    <tr valign="top">
+      <td colspan=5 align="right"><strong>Summen</strong></td>
+      <td>${total_km} km x 0,30€ = <strong>${total_driving_costs}€</strong></td>
+      <td><strong>${total_food_money}€</strong></td>
     </tr>
   </table>
+
+  <p><strong>Gesamtsumme der Reisekosten: ${
+      total_driving_costs + total_food_money
+  }€</strong></p>
 
   <p>${city}, den ${date}</p>
   <img class="signature" src="data:image/png;base64,${signature}"/>
@@ -76,7 +78,7 @@ function row(it: Entry) {
   <td rowspan=2>${it.subject}</td>
   <td rowspan=2>${it.hours}</td>
   <td rowspan=2>${it.km} km x 0,30€</td>
-  <td rowspan=2>${it.food_money}</td>
+  <td rowspan=2>${it.food_money}€</td>
 </tr>
 <tr>
   <td>${it.end_time}</td>

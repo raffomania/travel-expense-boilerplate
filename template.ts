@@ -19,7 +19,9 @@ export default function render(details: Details) {
 
     const rows = entries.map(row).join("");
     const decoder = new TextDecoder("utf-8");
-    const styles = decoder.decode(Deno.readFileSync("./main.css"));
+    const styles = ["./main.css"].map((file) =>
+        decoder.decode(Deno.readFileSync(file))
+    );
 
     const signature = encode(Deno.readFileSync(signature_image));
 
@@ -40,23 +42,27 @@ export default function render(details: Details) {
   <p class="author">Name: ${author}, Firma: ${company}</p>
   </header>
 
-  <table style="width: 100%;">
-    <tr>
-      <th>lfd. Nr.</th>
-      <th>Datum</th>
-      <th>Reisebeginn/-ende</th>
-      <th>Reiseanlass; Reiseweg (Ziel und Zweck der Reise)</th>
-      <th>Std.</th>
-      <th>dienstl. gefahrene km</th>
-      <th>Verpflegungspauschbeträge, mind. 8h = 14€, mind. 24h = 28€</th>
-    </tr>
+  <table style="width: 100%;" class="pure-table pure-table-bordered">
+    <thead>
+      <tr>
+        <th>lfd. Nr.</th>
+        <th>Datum</th>
+        <th>Reisebeginn/-ende</th>
+        <th>Reiseanlass; Reiseweg (Ziel und Zweck der Reise)</th>
+        <th>Std.</th>
+        <th>dienstl. gefahrene km</th>
+        <th>Verpflegungspauschbeträge, mind. 8h = 14€, mind. 24h = 28€</th>
+      </tr>
+    </thead>
 
-    ${rows}
-    <tr valign="top">
-      <td colspan=5 align="right"><strong>Summen</strong></td>
-      <td>${total_km} km x 0,30€ = <strong>${total_driving_costs}€</strong></td>
-      <td><strong>${total_food_money}€</strong></td>
-    </tr>
+    <tbody>
+      ${rows}
+      <tr valign="top">
+        <td colspan=5 align="right"><strong>Summen</strong></td>
+        <td>${total_km} km x 0,30€ = <strong>${total_driving_costs}€</strong></td>
+        <td><strong>${total_food_money}€</strong></td>
+      </tr>
+    </tbody>
   </table>
 
   <p><strong>Gesamtsumme der Reisekosten: ${

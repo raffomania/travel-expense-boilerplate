@@ -1,4 +1,4 @@
-build input=details.example.yml output=output.pdf:
+build input="details.example.yml" output="output.pdf":
 	deno run --allow-read=".,{{input}}" render.ts "{{input}}" | wkhtmltopdf - "{{output}}"
 
 watch:

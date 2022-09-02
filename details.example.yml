@@ -7,8 +7,7 @@ city: Bielefeld
 title: Reisekostenabrechnung
 
 entries:
-    - index: 1
-      date: 01.01.
+    - date: 01.01.
       start_time: "09:00"
       end_time: "18:00"
       subject: Präsentation bei Konferenz Foobar

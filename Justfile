@@ -1,6 +1,5 @@
-build:
-	deno run --allow-read=. render.ts > output.html
-	wkhtmltopdf output.html output.pdf
+build input=details.example.yml output=output.pdf:
+	deno run --allow-read=".,{{input}}" render.ts "{{input}}" | wkhtmltopdf - "{{output}}"
 
 watch:
 	watchexec -e yml,html,ts,css --no-project-ignore -i 'html2pdf*' -i 'output.*' 'just build'

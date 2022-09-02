@@ -33,7 +33,7 @@ export interface Entry {
 
 const decoder = new TextDecoder("utf-8");
 
-const yamlFile = await Deno.readFile("./details.yml");
+const yamlFile = await Deno.readFile(Deno.args[0]);
 
 /** Decoding the file text. */
 const yamlText = decoder.decode(yamlFile);

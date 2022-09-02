@@ -69,10 +69,10 @@ export default function render(details: Details) {
 </html>`;
 }
 
-function row(it: Entry) {
+function row(it: Entry, index: number) {
     return `
 <tr valign="top">
-  <td rowspan=2>${it.index}</td>
+  <td rowspan=2>${index + 1}</td>
   <td rowspan=2>${it.date}</td>
   <td>${it.start_time}</td>
   <td rowspan=2>${it.subject}</td>

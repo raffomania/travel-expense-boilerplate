@@ -1,6 +1,13 @@
 import { encode } from "https://deno.land/std/encoding/base64.ts";
 import { Details, Entry } from "./render.ts";
 
+function formatCurrency(val: number) {
+    return Intl.NumberFormat("de-DE", {
+        style: "currency",
+        currency: "eur",
+    }).format(val);
+}
+
 export default function render(details: Details) {
     const {
         city,
@@ -51,7 +58,7 @@ export default function render(details: Details) {
         <th>Reiseanlass; Reiseweg (Ziel und Zweck der Reise)</th>
         <th>Std.</th>
         <th>dienstl. gefahrene km</th>
-        <th>Verpflegungspauschbeträge, mind. 8h = 14€, mind. 24h = 28€</th>
+        <th>Verpflegungspauschbeträge, mind. 8h = ${formatCurrency(14)}, mind. 24h = ${formatCurrency(28)}</th>
       </tr>
     </thead>
 
@@ -59,15 +66,15 @@ export default function render(details: Details) {
       ${rows}
       <tr valign="top">
         <td colspan=5 align="right"><strong>Summen</strong></td>
-        <td>${total_km} km x 0,30€ = <strong>${total_driving_costs}€</strong></td>
-        <td><strong>${total_food_money}€</strong></td>
+        <td>${total_km} km x ${formatCurrency(0.3)} = <strong>${formatCurrency(total_driving_costs)}</strong></td>
+        <td><strong>${formatCurrency(total_food_money)}</strong></td>
       </tr>
     </tbody>
   </table>
 
   <p><strong>Gesamtsumme der Reisekosten: ${
-      total_driving_costs + total_food_money
-  }€</strong></p>
+      formatCurrency(total_driving_costs + total_food_money)
+  }</strong></p>
 
   <p>${city}, den ${date}</p>
   <img class="signature" src="data:image/png;base64,${signature}"/>
@@ -83,8 +90,8 @@ function row(it: Entry, index: number) {
   <td>${it.start_time}</td>
   <td rowspan=2>${it.subject}</td>
   <td rowspan=2>${it.hours}</td>
-  <td rowspan=2>${it.km} km x 0,30€</td>
-  <td rowspan=2>${it.food_money}€</td>
+  <td rowspan=2>${it.km} km x ${formatCurrency(0.3)}</td>
+  <td rowspan=2>${formatCurrency(it.food_money)}</td>
 </tr>
 <tr>
   <td>${it.end_time}</td>

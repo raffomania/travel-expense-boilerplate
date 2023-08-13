@@ -1,7 +1,7 @@
-#!/usr/bin/oil
-shopt --set xtrace
+#!/usr/bin/sh
+set -euxo pipefail
 
-var file = "$(realpath $1)"
-var output = "$(echo $file | sed -e 's/\.yml$/\.pdf/')"
+file="$(realpath $1)"
+output="$(echo $file | sed -e 's/\.yml$/\.pdf/')"
 cd "$(dirname $0)/.."
 just build "$file" "$output"

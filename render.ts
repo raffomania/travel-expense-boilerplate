@@ -10,7 +10,7 @@ export interface RawDetails {
     end_date: string;
     company: string;
     signature_image?: string;
-    entries: RawEntry[];
+    entries: Entry[];
 }
 
 export interface Details extends RawDetails {
@@ -25,7 +25,17 @@ export interface RawEntry {
     subject: string;
     hours: number;
     km: number;
-    food_money: number;
+    end_time: string;
+    food_money?: number;
+}
+
+export interface Entry {
+    date: string;
+    start_time: string;
+    subject: string;
+    hours: number;
+    km: number;
+    foodMoney: number;
     end_time: string;
 }
 
@@ -51,5 +61,19 @@ export function process(rawDetails: RawDetails): Details {
         total_driving_costs,
         total_food_money,
         ...rawDetails,
+        entries: rawDetails.entries.map(processEntry),
+    };
+}
+
+function processEntry(raw: RawEntry): Entry {
+    let foodMoney = 0;
+    if (raw.hours >= 8) {
+        foodMoney = 14;
+    } else if (raw.hours > 24) {
+        foodMoney = 24;
+    }
+    return {
+        foodMoney: raw.food_money ?? foodMoney,
+        ...raw,
     };
 }

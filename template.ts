@@ -1,5 +1,5 @@
 import { encode } from "https://deno.land/std/encoding/base64.ts";
-import { Details, RawEntry } from "./render.ts";
+import { Details, Entry, RawEntry } from "./render.ts";
 
 function formatCurrency(val: number) {
     return Intl.NumberFormat("de-DE", {
@@ -89,7 +89,7 @@ export default function render(details: Details) {
 </html>`;
 }
 
-function renderRow(it: RawEntry, index: number) {
+function renderRow(it: Entry, index: number) {
     return `
 <tr valign="top">
   <td rowspan=2>${index + 1}</td>
@@ -98,7 +98,7 @@ function renderRow(it: RawEntry, index: number) {
   <td rowspan=2>${it.subject}</td>
   <td rowspan=2>${it.hours}</td>
   <td rowspan=2>${it.km} km x ${formatCurrency(0.3)}</td>
-  <td rowspan=2>${formatCurrency(it.food_money)}</td>
+  <td rowspan=2>${formatCurrency(it.foodMoney)}</td>
 </tr>
 <tr>
   <td>${it.end_time}</td>

@@ -20,7 +20,6 @@ export interface Details extends RawDetails {
 }
 
 export interface RawEntry {
-    index: number;
     date: string;
     start_time: string;
     subject: string;

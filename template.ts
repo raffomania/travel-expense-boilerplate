@@ -24,7 +24,7 @@ export default function render(details: Details) {
         total_driving_costs,
     } = details;
 
-    const rows = entries.map(row).join("");
+    const rows = entries.map(renderRow).join("");
     const decoder = new TextDecoder("utf-8");
     const styles = ["./main.css"].map((file) =>
         decoder.decode(Deno.readFileSync(file))
@@ -89,7 +89,7 @@ export default function render(details: Details) {
 </html>`;
 }
 
-function row(it: RawEntry, index: number) {
+function renderRow(it: RawEntry, index: number) {
     return `
 <tr valign="top">
   <td rowspan=2>${index + 1}</td>

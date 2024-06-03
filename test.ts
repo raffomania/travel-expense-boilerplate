@@ -36,3 +36,35 @@ entries:
     const rendered = render(yaml);
     await assertSnapshot(t, rendered);
 });
+
+Deno.test("snapshotNoIndices", async function (t): Promise<void> {
+    const yaml = process(
+        (await parseYaml(`
+author: Herbert Derpert
+company: Corp
+date: 10.05.2024
+start_date: 01.04.2024
+end_date: 30.04.2023
+city: Hamburg
+title: Travelin
+
+entries:
+    - date: 10.04.
+      start_time: "08:30"
+      end_time: "17:30"
+      subject: "Did some stuff"
+      hours: 9
+      km: 20
+      food_money: 14
+    - date: 23.04.
+      start_time: "10:00"
+      end_time: "18:00"
+      subject: "There's more stuff here"
+      hours: 8
+      km: 20
+      food_money: 14
+    `)) as RawDetails
+    );
+    const rendered = render(yaml);
+    await assertSnapshot(t, rendered);
+});

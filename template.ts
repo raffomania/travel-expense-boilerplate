@@ -98,7 +98,7 @@ function renderRow(it: Entry, index: number) {
   <td rowspan=2>${it.subject}</td>
   <td rowspan=2>${it.hours}</td>
   <td rowspan=2>${it.km} km x ${formatCurrency(0.3)}</td>
-  <td rowspan=2>${formatCurrency(it.foodMoney)}</td>
+  <td rowspan=2>${formatCurrency(it.food_money)}</td>
 </tr>
 <tr>
   <td>${it.end_time}</td>

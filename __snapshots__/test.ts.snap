@@ -290,12 +290,12 @@ img.signature {
       <tr valign="top">
         <td colspan=5 align="right"><strong>Summen</strong></td>
         <td>40 km x 0,30 € = <strong>12,00 €</strong></td>
-        <td><strong>NaN €</strong></td>
+        <td><strong>28,00 €</strong></td>
       </tr>
     </tbody>
   </table>
 
-  <p><strong>Gesamtsumme der Reisekosten: NaN €</strong></p>
+  <p><strong>Gesamtsumme der Reisekosten: 40,00 €</strong></p>
 
   <p>Hamburg, den 10.05.2024</p>
   <img class="signature" src="data:image/png;base64,"/>

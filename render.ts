@@ -35,7 +35,7 @@ export interface Entry {
     subject: string;
     hours: number;
     km: number;
-    foodMoney: number;
+    food_money: number;
     end_time: string;
 }
 
@@ -52,28 +52,29 @@ export async function load(): Promise<RawDetails> {
 }
 
 export function process(rawDetails: RawDetails): Details {
-    const total_km = sum(rawDetails["entries"].map(prop("km")));
+    const entries = rawDetails.entries.map(processEntry);
+    const total_km = sum(entries.map(prop("km")));
     const total_driving_costs = total_km * 0.3;
-    const total_food_money = sum(rawDetails["entries"].map(prop("food_money")));
+    const total_food_money = sum(entries.map(prop("food_money")));
 
     return {
+        ...rawDetails,
         total_km,
         total_driving_costs,
         total_food_money,
-        ...rawDetails,
-        entries: rawDetails.entries.map(processEntry),
+        entries,
     };
 }
 
 function processEntry(raw: RawEntry): Entry {
-    let foodMoney = 0;
+    let food_money = 0;
     if (raw.hours >= 8) {
-        foodMoney = 14;
+        food_money = 14;
     } else if (raw.hours > 24) {
-        foodMoney = 24;
+        food_money = 24;
     }
     return {
-        foodMoney: raw.food_money ?? foodMoney,
+        food_money: raw.food_money ?? food_money,
         ...raw,
     };
 }

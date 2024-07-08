@@ -1,5 +1,5 @@
-import { encode } from "https://deno.land/std/encoding/base64.ts";
-import { Details, Entry, RawEntry } from "./render.ts";
+import { encodeBase64 } from "https://deno.land/std@0.224.0/encoding/base64.ts";
+import { ProcessedInput, ProcessedEntry } from "./render.ts";
 
 function formatCurrency(val: number) {
     return Intl.NumberFormat("de-DE", {
@@ -8,7 +8,7 @@ function formatCurrency(val: number) {
     }).format(val);
 }
 
-export default function render(details: Details) {
+export default function render(details: ProcessedInput) {
     const {
         city,
         date,
@@ -32,7 +32,7 @@ export default function render(details: Details) {
 
     let signature = "";
     if (signature_image !== undefined) {
-        signature = encode(Deno.readFileSync(signature_image));
+        signature = encodeBase64(Deno.readFileSync(signature_image));
     }
 
     return `
@@ -89,7 +89,7 @@ export default function render(details: Details) {
 </html>`;
 }
 
-function renderRow(it: Entry, index: number) {
+function renderRow(it: ProcessedEntry, index: number) {
     return `
 <tr valign="top">
   <td rowspan=2>${index + 1}</td>

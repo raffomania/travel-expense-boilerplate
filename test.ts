@@ -1,7 +1,7 @@
 import { assertSnapshot } from "https://deno.land/std@0.224.0/testing/snapshot.ts";
 import { parse as parseYaml } from "https://deno.land/std@0.63.0/encoding/yaml.ts";
 import render from "./template.ts";
-import { RawDetails, process } from "./render.ts";
+import { RawInput, process } from "./render.ts";
 
 Deno.test("basicSnapshot", async function (t): Promise<void> {
     const yaml = process(
@@ -31,7 +31,7 @@ entries:
       hours: 8
       km: 20
       food_money: 10
-    `)) as RawDetails
+    `)) as RawInput
     );
     const rendered = render(yaml);
     await assertSnapshot(t, rendered);
@@ -63,7 +63,7 @@ entries:
       hours: 8
       km: 20
       food_money: 14
-    `)) as RawDetails
+    `)) as RawInput
     );
     const rendered = render(yaml);
     await assertSnapshot(t, rendered);
@@ -93,7 +93,7 @@ entries:
       subject: "There's more stuff here"
       hours: 8
       km: 20
-    `)) as RawDetails
+    `)) as RawInput
     );
     const rendered = render(yaml);
     await assertSnapshot(t, rendered);

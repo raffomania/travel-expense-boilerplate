@@ -11,8 +11,6 @@ entries:
     start_time: "09:00"
     end_time: "18:00"
     subject: Präsentation bei Konferenz Foobar
-    food_money: 14
-    hours: 9
     km: 10
 
 signature_image: signature.jpg

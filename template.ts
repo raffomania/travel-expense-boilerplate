@@ -1,5 +1,5 @@
 import { encodeBase64 } from "https://deno.land/std@0.224.0/encoding/base64.ts";
-import { ProcessedInput, ProcessedEntry } from "./render.ts";
+import { ProcessedInput, ProcessedEntry, SMALL_FOOD_MONEY, BIG_FOOD_MONEY } from "./render.ts";
 
 function formatCurrency(val: number) {
     return Intl.NumberFormat("de-DE", {
@@ -61,9 +61,7 @@ export default function render(details: ProcessedInput) {
         <th>Reiseanlass; Reiseweg (Ziel und Zweck der Reise)</th>
         <th>Std.</th>
         <th>dienstl. gefahrene km</th>
-        <th>Verpflegungspauschbeträge, mind. 8h = ${formatCurrency(
-        14
-    )}, 24h = ${formatCurrency(28)}</th>
+        <th>Verpflegungspauschbeträge, mind. 8h = ${formatCurrency(SMALL_FOOD_MONEY)}, 24h = ${formatCurrency(BIG_FOOD_MONEY)}</th>
       </tr>
     </thead>
 

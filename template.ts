@@ -62,8 +62,8 @@ export default function render(details: ProcessedInput) {
         <th>Std.</th>
         <th>dienstl. gefahrene km</th>
         <th>Verpflegungspauschbeträge, mind. 8h = ${formatCurrency(
-            14
-        )}, mind. 24h = ${formatCurrency(28)}</th>
+        14
+    )}, 24h = ${formatCurrency(28)}</th>
       </tr>
     </thead>
 
@@ -80,8 +80,8 @@ export default function render(details: ProcessedInput) {
   </table>
 
   <p><strong>Gesamtsumme der Reisekosten: ${formatCurrency(
-      total_driving_costs + total_food_money
-  )}</strong></p>
+        total_driving_costs + total_food_money
+    )}</strong></p>
 
   <p>${city}, den ${date}</p>
   <img class="signature" src="data:image/png;base64,${signature}"/>

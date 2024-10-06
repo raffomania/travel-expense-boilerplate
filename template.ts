@@ -84,6 +84,7 @@ export default function render(details: ProcessedInput) {
     )}</strong></p>
 
   <p>${city}, den ${date}</p>
+  <p>${author}</p>
   <img class="signature" src="data:image/png;base64,${signature}"/>
 </body>
 </html>`;

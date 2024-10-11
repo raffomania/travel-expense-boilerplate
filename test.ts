@@ -3,6 +3,9 @@ import { parse as parseYaml } from "https://deno.land/std@0.63.0/encoding/yaml.t
 import render from "./template.ts";
 import { RawInput, process } from "./render.ts";
 
+// These tests ensure that old yaml data renders the same as before,
+// even when their data differs from values that are now automatically
+// calculated.
 Deno.test("basicSnapshot", async function (t): Promise<void> {
     const yaml = process(
         (await parseYaml(`
@@ -62,7 +65,7 @@ entries:
       subject: "There's more stuff here"
       hours: 8
       km: 20
-      food_money: 14
+      food_money: 10
     `)) as RawInput
     );
     const rendered = render(yaml);
@@ -91,7 +94,7 @@ entries:
       start_time: "10:00"
       end_time: "18:00"
       subject: "There's more stuff here"
-      hours: 8
+      hours: 20
       km: 20
     `)) as RawInput
     );

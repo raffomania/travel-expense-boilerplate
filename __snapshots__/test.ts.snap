@@ -181,7 +181,7 @@ img.signature {
   <td rowspan=2>There's more stuff here</td>
   <td rowspan=2>8</td>
   <td rowspan=2>20 km x 0,30 €</td>
-  <td rowspan=2>14,00 €</td>
+  <td rowspan=2>10,00 €</td>
 </tr>
 <tr>
   <td>18:00</td>
@@ -190,12 +190,12 @@ img.signature {
       <tr valign="top">
         <td colspan=5 align="right"><strong>Summen</strong></td>
         <td>40 km x 0,30 € = <strong>12,00 €</strong></td>
-        <td><strong>28,00 €</strong></td>
+        <td><strong>24,00 €</strong></td>
       </tr>
     </tbody>
   </table>
 
-  <p><strong>Gesamtsumme der Reisekosten: 40,00 €</strong></p>
+  <p><strong>Gesamtsumme der Reisekosten: 36,00 €</strong></p>
 
   <p>Hamburg, den 10.05.2024</p>
   <p>Herbert Derpert</p>
@@ -281,7 +281,7 @@ img.signature {
   <td rowspan=2>23.04.</td>
   <td>10:00</td>
   <td rowspan=2>There's more stuff here</td>
-  <td rowspan=2>8</td>
+  <td rowspan=2>20</td>
   <td rowspan=2>20 km x 0,30 €</td>
   <td rowspan=2>14,00 €</td>
 </tr>

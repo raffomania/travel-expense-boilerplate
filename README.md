@@ -1,6 +1,6 @@
 # Travel Expense Boilerplate
 
-Automatically generate german travel expense report for freelances from a YAML file.
+Automatically generate german travel expense report for freelancers from a YAML file.
 
 ## Setup
 
@@ -10,6 +10,7 @@ Install dependencies:
 - [deno](https://deno.land/)
 - [wkthmltopdf](https://wkhtmltopdf.org/)
 
+Copy `details.example.yml` to `details.yml` and add your travel expenses.
 Run `just build` to generate `output.html` and `output.pdf`.
 
 ## License

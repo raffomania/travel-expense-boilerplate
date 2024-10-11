@@ -1,6 +1,9 @@
 import { parse as parseYaml } from "https://deno.land/std@0.63.0/encoding/yaml.ts";
 import { prop, sum } from "https://deno.land/x/ramda@v0.27.2/mod.ts";
 
+export var SMALL_FOOD_MONEY = 14;
+export var BIG_FOOD_MONEY = 28;
+
 export interface RawInput {
     city: string;
     date?: string;
@@ -54,6 +57,7 @@ export async function load(): Promise<RawInput> {
 
 export function process(rawDetails: RawInput): ProcessedInput {
     const entries = rawDetails.entries.map(processEntry);
+
     const total_km = sum(entries.map(prop("km")));
     const total_driving_costs = total_km * 0.3;
     const total_food_money = sum(entries.map(prop("food_money")));
@@ -74,14 +78,41 @@ export function process(rawDetails: RawInput): ProcessedInput {
 }
 
 function processEntry(raw: RawEntry): ProcessedEntry {
-    let food_money = 0;
-    if (raw.hours >= 8) {
-        food_money = 14;
-    } else if (raw.hours > 24) {
-        food_money = 24;
+    // Set some default in case those values aren't specified
+    if (raw.km == undefined) {
+        raw.km = 0;
     }
+    if (raw.start_time == undefined) {
+        raw.start_time = "00:00";
+    }
+    if (raw.end_time == undefined) {
+        raw.end_time = "24:00";
+    }
+
+    // Autocalculate hours unless explicitly defined.
+    if (raw.hours == undefined) {
+        // Calculate the hours based on the given time strings.
+        // Let the javascript dateparser do its job.
+        var start = new Date(`01/01/2024 ${raw.start_time}`);
+        var end = new Date(`01/01/2024 ${raw.end_time}`);
+
+        var milliseconds_diff = end - start;
+        raw.hours = Math.floor(milliseconds_diff / 1000 / 60 / 60);
+    }
+
+    // Autocalculate food_money unless explicitly defined.
+    if (raw.food_money == undefined) {
+        if (raw.hours >= 8 && raw.hours < 24) {
+            raw.food_money = SMALL_FOOD_MONEY;
+        } else if (raw.hours >= 24) {
+            raw.food_money = BIG_FOOD_MONEY;
+        } else {
+            raw.food_money = 0;
+        }
+    }
+
     return {
-        food_money: raw.food_money ?? food_money,
+        food_money: raw.food_money!,
         ...raw,
     };
 }

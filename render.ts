@@ -93,10 +93,10 @@ function processEntry(raw: RawEntry): ProcessedEntry {
     if (raw.hours == undefined) {
         // Calculate the hours based on the given time strings.
         // Let the javascript dateparser do its job.
-        var start = new Date(`01/01/2024 ${raw.start_time}`);
-        var end = new Date(`01/01/2024 ${raw.end_time}`);
+        const start = new Date(`01/01/2024 ${raw.start_time}`).getTime();
+        const end = new Date(`01/01/2024 ${raw.end_time}`).getTime();
 
-        var milliseconds_diff = end - start;
+        const milliseconds_diff = end - start;
         raw.hours = Math.floor(milliseconds_diff / 1000 / 60 / 60);
     }
 

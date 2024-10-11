@@ -129,3 +129,30 @@ entries:
     const rendered = render(yaml);
     await assertSnapshot(t, rendered);
 });
+
+Deno.test("snapshotNoDates", async function (t): Promise<void> {
+    const yaml = process(
+        (await parseYaml(`
+author: Herbert Derpert
+company: Corp
+date: 10.05.2024
+month: 2024-04
+city: Hamburg
+title: Travelin
+
+entries:
+    - day: 10
+      start_time: "08:30"
+      end_time: "17:30"
+      subject: "Did some stuff"
+      km: 20
+    - day: 23
+      start_time: "10:00"
+      end_time: "18:00"
+      subject: "There's more stuff here"
+      km: 20
+    `)) as RawInput
+    );
+    const rendered = render(yaml);
+    await assertSnapshot(t, rendered);
+});

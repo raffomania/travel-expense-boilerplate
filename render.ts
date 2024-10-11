@@ -1,16 +1,19 @@
 import { parse as parseYaml } from "https://deno.land/std@0.63.0/encoding/yaml.ts";
 import { prop, sum } from "https://deno.land/x/ramda@v0.27.2/mod.ts";
+import { formatDate } from "./format.ts";
+import { assert } from "https://deno.land/std@0.224.0/assert/assert.ts";
 
-export var SMALL_FOOD_MONEY = 14;
-export var BIG_FOOD_MONEY = 28;
+export const SMALL_FOOD_MONEY = 14;
+export const BIG_FOOD_MONEY = 28;
 
 export interface RawInput {
     city: string;
     date?: string;
     title: string;
     author: string;
-    start_date: string;
-    end_date: string;
+    start_date?: string;
+    end_date?: string;
+    month?: string;
     company: string;
     signature_image?: string;
     entries: ProcessedEntry[];
@@ -24,7 +27,8 @@ export interface ProcessedInput extends RawInput {
 }
 
 export interface RawEntry {
-    date: string;
+    date?: string;
+    day?: number;
     start_time: string;
     subject: string;
     hours: number;
@@ -56,16 +60,24 @@ export async function load(): Promise<RawInput> {
 }
 
 export function process(rawDetails: RawInput): ProcessedInput {
-    const entries = rawDetails.entries.map(processEntry);
+    let month = undefined;
+    if (rawDetails.month !== undefined) {
+        month = new Date(rawDetails.month);
+        rawDetails.start_date = formatDate(
+            new Date(month.getFullYear(), month.getMonth(), 1)
+        );
+        rawDetails.end_date = formatDate(
+            new Date(month.getFullYear(), month.getMonth() + 1, 0)
+        );
+    }
+    const entries = rawDetails.entries.map((e) => processEntry(e, month));
 
     const total_km = sum(entries.map(prop("km")));
     const total_driving_costs = total_km * 0.3;
     const total_food_money = sum(entries.map(prop("food_money")));
 
     const today = new Date();
-    const date =
-        rawDetails.date ??
-        `${today.getDate()}.${today.getMonth() + 1}.${today.getFullYear()}`;
+    const date = rawDetails.date ?? formatDate(today);
 
     return {
         ...rawDetails,
@@ -77,7 +89,7 @@ export function process(rawDetails: RawInput): ProcessedInput {
     };
 }
 
-function processEntry(raw: RawEntry): ProcessedEntry {
+function processEntry(raw: RawEntry, month?: Date): ProcessedEntry {
     // Set some default in case those values aren't specified
     if (raw.km == undefined) {
         raw.km = 0;
@@ -87,6 +99,21 @@ function processEntry(raw: RawEntry): ProcessedEntry {
     }
     if (raw.end_time == undefined) {
         raw.end_time = "24:00";
+    }
+
+    let date = raw.date;
+    if (date == undefined) {
+        assert(
+            month !== undefined,
+            "You have entries without dates specified. Add a top-level month declaration to specify the month these entries should be in."
+        );
+        assert(
+            raw.day !== undefined,
+            `Missing "day" field in entry: ${JSON.stringify(raw)}`
+        );
+        const newDate = new Date(month.getTime());
+        newDate.setDate(raw.day);
+        date = formatDate(newDate);
     }
 
     // Autocalculate hours unless explicitly defined.
@@ -114,5 +141,6 @@ function processEntry(raw: RawEntry): ProcessedEntry {
     return {
         food_money: raw.food_money!,
         ...raw,
+        date,
     };
 }

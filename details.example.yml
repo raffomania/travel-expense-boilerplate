@@ -1,13 +1,12 @@
 author: Max Mustermann
 company: Max Mustermann
 date: 08.02.2022
-start_date: 01.02.2022
-end_date: 28.02.2022
+month: 2022-02
 city: Bielefeld
 title: Reisekostenabrechnung
 
 entries:
-  - date: 01.01.
+  - day: 12
     start_time: "09:00"
     end_time: "18:00"
     subject: Präsentation bei Konferenz Foobar

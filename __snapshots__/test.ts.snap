@@ -407,3 +407,105 @@ img.signature {
 </body>
 </html>\`
 `;
+
+snapshot[`snapshotNoDates 1`] = `
+\`
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title></title>
+
+  <style>* {
+    box-sizing: border-box;
+}
+body {
+    font-family: Noto Sans;
+    font-size: 12pt;
+    padding: 2em;
+}
+th {
+    font-size: 10pt;
+    text-align: left;
+}
+table,
+tr,
+td {
+    border: 1px solid #888;
+    border-collapse: collapse;
+}
+th,
+td {
+    padding: 0.5em;
+}
+
+img.signature {
+    max-width: 10em;
+}
+</style>
+</head>
+<body>
+  <header id="title-block-header">
+  <span style="float: right;">Vom 01.04.2024 bis 30.04.2024</span>
+  <h1 class="title">Travelin</h1>
+  <p class="author">Name: Herbert Derpert, Firma: Corp</p>
+  </header>
+
+  <table style="width: 100%;" class="pure-table pure-table-bordered">
+    <thead>
+      <tr>
+        <th>lfd. Nr.</th>
+        <th>Datum</th>
+        <th>Reisebeginn/-ende</th>
+        <th>Reiseanlass; Reiseweg (Ziel und Zweck der Reise)</th>
+        <th>Std.</th>
+        <th>dienstl. gefahrene km</th>
+        <th>Verpflegungspauschbeträge, mind. 8h = 14,00 €, 24h = 28,00 €</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      
+<tr valign="top">
+  <td rowspan=2>1</td>
+  <td rowspan=2>10.04.2024</td>
+  <td>08:30</td>
+  <td rowspan=2>Did some stuff</td>
+  <td rowspan=2>9</td>
+  <td rowspan=2>20 km x 0,30 €</td>
+  <td rowspan=2>14,00 €</td>
+</tr>
+<tr>
+  <td>17:30</td>
+</tr>
+  
+<tr valign="top">
+  <td rowspan=2>2</td>
+  <td rowspan=2>23.04.2024</td>
+  <td>10:00</td>
+  <td rowspan=2>There's more stuff here</td>
+  <td rowspan=2>8</td>
+  <td rowspan=2>20 km x 0,30 €</td>
+  <td rowspan=2>14,00 €</td>
+</tr>
+<tr>
+  <td>18:00</td>
+</tr>
+  
+      <tr valign="top">
+        <td colspan=5 align="right"><strong>Summen</strong></td>
+        <td>40 km x 0,30 € = <strong>12,00 €</strong></td>
+        <td><strong>28,00 €</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Gesamtsumme der Reisekosten: 40,00 €</strong></p>
+
+  <p>Hamburg, den 10.05.2024</p>
+  <p>Herbert Derpert</p>
+  <img class="signature" src="data:image/png;base64,"/>
+</body>
+</html>\`
+`;

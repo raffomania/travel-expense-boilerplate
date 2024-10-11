@@ -53,7 +53,7 @@ img.signature {
         <th>Reiseanlass; Reiseweg (Ziel und Zweck der Reise)</th>
         <th>Std.</th>
         <th>dienstl. gefahrene km</th>
-        <th>Verpflegungspauschbeträge, mind. 8h = 14,00 €, mind. 24h = 28,00 €</th>
+        <th>Verpflegungspauschbeträge, mind. 8h = 14,00 €, 24h = 28,00 €</th>
       </tr>
     </thead>
 
@@ -96,6 +96,7 @@ img.signature {
   <p><strong>Gesamtsumme der Reisekosten: 36,00 €</strong></p>
 
   <p>Hamburg, den 10.05.2024</p>
+  <p>Herbert Derpert</p>
   <img class="signature" src="data:image/png;base64,"/>
 </body>
 </html>\`
@@ -154,7 +155,7 @@ img.signature {
         <th>Reiseanlass; Reiseweg (Ziel und Zweck der Reise)</th>
         <th>Std.</th>
         <th>dienstl. gefahrene km</th>
-        <th>Verpflegungspauschbeträge, mind. 8h = 14,00 €, mind. 24h = 28,00 €</th>
+        <th>Verpflegungspauschbeträge, mind. 8h = 14,00 €, 24h = 28,00 €</th>
       </tr>
     </thead>
 
@@ -197,6 +198,7 @@ img.signature {
   <p><strong>Gesamtsumme der Reisekosten: 40,00 €</strong></p>
 
   <p>Hamburg, den 10.05.2024</p>
+  <p>Herbert Derpert</p>
   <img class="signature" src="data:image/png;base64,"/>
 </body>
 </html>\`
@@ -255,7 +257,7 @@ img.signature {
         <th>Reiseanlass; Reiseweg (Ziel und Zweck der Reise)</th>
         <th>Std.</th>
         <th>dienstl. gefahrene km</th>
-        <th>Verpflegungspauschbeträge, mind. 8h = 14,00 €, mind. 24h = 28,00 €</th>
+        <th>Verpflegungspauschbeträge, mind. 8h = 14,00 €, 24h = 28,00 €</th>
       </tr>
     </thead>
 
@@ -298,6 +300,7 @@ img.signature {
   <p><strong>Gesamtsumme der Reisekosten: 40,00 €</strong></p>
 
   <p>Hamburg, den 10.05.2024</p>
+  <p>Herbert Derpert</p>
   <img class="signature" src="data:image/png;base64,"/>
 </body>
 </html>\`
